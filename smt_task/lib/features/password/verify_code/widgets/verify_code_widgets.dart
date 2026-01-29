@@ -11,11 +11,9 @@ class VerifyCodeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<VerifyCodeController>();
     final size = MediaQuery.of(context).size;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // --- ১. ব্যাক বাটন ---
         Align(
           alignment: Alignment.centerLeft,
           child: IconButton(
@@ -29,7 +27,6 @@ class VerifyCodeBody extends StatelessWidget {
         ),
         SizedBox(height: size.height * 0.04),
 
-        // --- ২. টাইটেল ও ইমেইল ইনফো ---
         const Text(
           'Verify Code',
           style: TextStyle(
@@ -62,7 +59,6 @@ class VerifyCodeBody extends StatelessWidget {
 
         SizedBox(height: size.height * 0.05),
 
-        // --- ৩. OTP ইনপুট বক্স ---
         OTPInputWidget(
           controllers: controller.otpControllers,
           focusNodes: controller.otpFocusNodes,
@@ -70,7 +66,6 @@ class VerifyCodeBody extends StatelessWidget {
 
         SizedBox(height: size.height * 0.04),
 
-        // --- ৪. রিসেন্ড কোড টাইমার ---
         Obx(() => GestureDetector(
           onTap: controller.remainingTime.value == 0
               ? controller.resendCode
@@ -93,7 +88,6 @@ class VerifyCodeBody extends StatelessWidget {
 
         SizedBox(height: size.height * 0.06),
 
-        // --- ৫. কাস্টম নাম্বার প্যাড ---
         CustomNumberPadWidget(
           onNumberTap: controller.onNumberTap,
           onBackspace: controller.onBackspace,

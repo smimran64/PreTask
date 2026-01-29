@@ -13,7 +13,6 @@ class ProductForm extends StatelessWidget {
     final controller = Get.find<ProductController>();
 
     final List<String> commonFields = ['capacity', 'price', 'CPU model'];
-
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
       appBar: AppBar(

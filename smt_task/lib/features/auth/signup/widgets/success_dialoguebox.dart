@@ -26,7 +26,7 @@ void showSuccessRegistrationDialog() {
                   width: 140,
                   height: 140,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF2563EB).withOpacity(0.05),
+                    color: const Color(0xFF2563EB).withValues(alpha: 0.05),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -34,7 +34,7 @@ void showSuccessRegistrationDialog() {
                   width: 100,
                   height: 100,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF2563EB).withOpacity(0.1),
+                    color: const Color(0xFF2563EB).withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                 ),

@@ -58,7 +58,6 @@ class EditProductScreen extends StatelessWidget {
                 ),
               );
             }),
-
             const SizedBox(height: 30),
 
             CustomButton(

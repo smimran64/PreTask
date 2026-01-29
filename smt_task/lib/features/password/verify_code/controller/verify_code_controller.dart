@@ -37,7 +37,10 @@ class VerifyCodeController extends GetxController {
         if (i < 3) {
           otpFocusNodes[i + 1].requestFocus();
         } else {
-          verifyOTP();
+          otpFocusNodes[i].unfocus();
+          Future.delayed(const Duration(milliseconds: 50), () {
+            verifyOTP();
+          });
         }
         break;
       }
@@ -61,6 +64,9 @@ class VerifyCodeController extends GetxController {
   }
 
   Future<void> verifyOTP() async {
+    print("Debug: Current OTP is => ${getOTP()}");
+    if (isLoading.value) return;
+
     final otp = getOTP();
     const String correctOTP = "1234";
 
@@ -70,16 +76,18 @@ class VerifyCodeController extends GetxController {
         'Please enter complete OTP code',
         backgroundColor: Colors.red,
         colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
       );
       return;
     }
 
     try {
       isLoading.value = true;
+
       await Future.delayed(const Duration(seconds: 2));
 
       if (otp == correctOTP) {
-        Get.toNamed('/reset-password', arguments: email.value);
+        Get.offNamed('/reset_password', arguments: email.value);
       } else {
         throw Exception("Invalid OTP");
       }
@@ -88,9 +96,11 @@ class VerifyCodeController extends GetxController {
         'Error',
         'Invalid verification code. Please try again.',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.red.withValues(alpha: 0.8),
         colorText: Colors.white,
+        duration: const Duration(seconds: 2),
       );
+
       clearOTP();
     } finally {
       isLoading.value = false;

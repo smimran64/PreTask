@@ -10,7 +10,6 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignInController());
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

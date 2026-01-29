@@ -13,7 +13,6 @@ class SignUpFormBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<SignUpController>();
     final size = MediaQuery.of(context).size;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

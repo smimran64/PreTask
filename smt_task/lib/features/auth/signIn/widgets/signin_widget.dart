@@ -13,7 +13,6 @@ class SignInFormBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<SignInController>();
     final size = MediaQuery.of(context).size;
-
     return Column(
       children: [
         const SizedBox(height: 30),
@@ -21,7 +20,7 @@ class SignInFormBody extends StatelessWidget {
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            color: const Color(0xFF2563EB).withOpacity(0.1),
+            color: const Color(0xFF2563EB).withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           child: const Icon(Icons.menu_book_rounded,

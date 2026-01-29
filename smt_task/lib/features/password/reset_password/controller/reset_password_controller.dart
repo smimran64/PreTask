@@ -59,7 +59,6 @@ class ResetPasswordController extends GetxController {
       isLoading.value = true;
       await Future.delayed(const Duration(seconds: 2));
       _showSuccessDialog();
-
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -74,9 +73,11 @@ class ResetPasswordController extends GetxController {
       isLoading.value = false;
     }
   }
+
   void _showSuccessDialog() {
     showPasswordResetSuccessDialog();
   }
+
   @override
   void onClose() {
     newPasswordController.dispose();

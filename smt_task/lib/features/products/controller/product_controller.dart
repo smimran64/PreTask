@@ -31,13 +31,10 @@ class ProductController extends GetxController {
 
   Future<void> addProduct() async {
     if (addNameCtrl.text.isEmpty) {
-      Get.snackbar("Error", "Product name required");
       return;
     }
 
-    final dataMap = {
-      for (var e in addData.entries) e.key: e.value.text
-    };
+    final dataMap = {for (var e in addData.entries) e.key: e.value.text};
 
     await ProductService.createProduct(
       ProductModel(name: addNameCtrl.text, data: dataMap),
@@ -45,7 +42,6 @@ class ProductController extends GetxController {
 
     clearAdd();
     fetchProducts();
-    Get.snackbar("Success", "Product added");
   }
 
   void setEdit(ProductModel product) {
@@ -58,9 +54,7 @@ class ProductController extends GetxController {
   }
 
   Future<void> updateProduct(String id) async {
-    final dataMap = {
-      for (var e in editData.entries) e.key: e.value.text
-    };
+    final dataMap = {for (var e in editData.entries) e.key: e.value.text};
 
     await ProductService.updateProduct(
       id,
@@ -69,7 +63,6 @@ class ProductController extends GetxController {
 
     fetchProducts();
     Get.back();
-    Get.snackbar("Updated", "Product updated");
   }
 
   Future<void> deleteProduct(String id) async {
@@ -80,7 +73,6 @@ class ProductController extends GetxController {
     isDeleting(false);
 
     fetchProducts();
-    Get.snackbar("Deleted", "Product deleted");
   }
 
   void clearAdd() {
@@ -88,4 +80,3 @@ class ProductController extends GetxController {
     addData.clear();
   }
 }
-

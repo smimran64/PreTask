@@ -13,7 +13,7 @@ class SignUpController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxString passwordStrength = ''.obs;
 
-  bool get isFormValid => 
+  bool get isFormValid =>
       emailController.text.isNotEmpty &&
       fullNameController.text.isNotEmpty &&
       passwordController.text.isNotEmpty;
@@ -33,8 +33,8 @@ class SignUpController extends GetxController {
 
     if (password.length < 8) {
       passwordStrength.value = 'Weak';
-    } else if (!password.contains(RegExp(r'[A-Za-z]')) || 
-               !password.contains(RegExp(r'\d'))) {
+    } else if (!password.contains(RegExp(r'[A-Za-z]')) ||
+        !password.contains(RegExp(r'\d'))) {
       passwordStrength.value = 'Medium';
     } else {
       passwordStrength.value = 'Strong';
@@ -84,37 +84,14 @@ class SignUpController extends GetxController {
     return null;
   }
 
-  Future<void> signUp() async {
-    if (!formKey.currentState!.validate()) {
-      return;
-    }
+  void signUp() async {
+    isLoading.value = true;
 
-    try {
-      isLoading.value = true;
+    await Future.delayed(const Duration(seconds: 2));
 
-      
+    isLoading.value = false;
 
-      await Future.delayed(const Duration(seconds: 2));
-
-      showSuccessRegistrationDialog(
-        onContinue: () {
-          Get.offAllNamed('/signin');
-        },
-      );
-
-    } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to create account. Please try again.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        margin: const EdgeInsets.all(16),
-        borderRadius: 12,
-      );
-    } finally {
-      isLoading.value = false;
-    }
+    showSuccessRegistrationDialog();
   }
 
   void navigateToSignIn() {

@@ -23,12 +23,14 @@ class CustomNumberPadWidget extends StatelessWidget {
       ],
     );
   }
+
   Widget _buildNumberRow(List<String> numbers) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: numbers.map((number) => _buildNumberButton(number)).toList(),
     );
   }
+
   Widget _buildNumberButton(String value) {
     if (value == '.') {
       return const SizedBox(width: 80, height: 60);

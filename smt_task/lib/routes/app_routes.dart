@@ -6,8 +6,9 @@ import 'package:smt_task/features/location/screen/location_screen.dart';
 import 'package:smt_task/features/password/forgot_password/screen/forgot_password_screen.dart';
 import 'package:smt_task/features/password/reset_password/screen/reset_password_screen.dart';
 import 'package:smt_task/features/password/verify_code/screen/verify_code_screen.dart';
-import 'package:smt_task/features/products/form/product_form.dart';
 import 'package:smt_task/features/products/screen/product_screen.dart';
+import 'package:smt_task/features/products/widgets/product_form.dart';
+
 import 'package:smt_task/features/splash/bindings/splash_binding.dart';
 import 'package:smt_task/features/splash/screen/splash_screen.dart';
 import '../features/onboarding/screens/onborading_screen.dart';
@@ -45,7 +46,7 @@ class AppRoutes {
     GetPage(name: AppRoutes.verifycode, page: () => const VerifyCodeScreen()),
     GetPage(name: AppRoutes.locationPermission, page: () => LocationPermissionScreen()),
     GetPage(name: AppRoutes.languageSelection, page: () =>  LanguageSelectionScreen()),
-    GetPage(name: AppRoutes.productList, page: () =>  ProductScreen()),
-    GetPage(name: AppRoutes.productForm, page: () =>  AddProductForm()),
+    GetPage(name: AppRoutes.productList, page: () =>  ProductListScreen()),
+    GetPage(name: AppRoutes.productForm, page: () => ProductForm()),
   ];
 }

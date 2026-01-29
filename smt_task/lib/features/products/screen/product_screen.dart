@@ -1,67 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:smt_task/features/products/controller/product_controller.dart';
-import 'package:smt_task/features/products/form/product_form.dart';
+import 'package:smt_task/features/products/widgets/edit_widgets.dart';
+import 'package:smt_task/features/products/widgets/product_card_list.dart';
+import 'package:smt_task/features/products/widgets/product_form.dart';
 
-class ProductScreen extends StatelessWidget {
-  ProductScreen({super.key});
+class ProductListScreen extends StatelessWidget {
+  final controller = Get.put(ProductController());
 
-  final c = Get.put(ProductController());
+  ProductListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Product List")),
+      appBar: AppBar(title: const Text("Product List"), centerTitle: true),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {          
-           showAddProductBottomSheet(); 
-        },
-        child: const Icon(Icons.add),
+        backgroundColor: const Color(0XFF1B6EF7),
+        onPressed: () => Get.to(() => const ProductForm()),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
-      body: Column(
-        children: [    
-          Expanded(
-            child: Obx(() {
-              if (c.isLoading.value) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return ListView.builder(
-                itemCount: c.products.length,
-                itemBuilder: (_, i) {
-                  final p = c.products[i];
-                  return Card(
-                    child: ListTile(
-                      title: Text(p.name),
-                      subtitle: Text(p.data.toString()),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.edit, color: Colors.blue),
-                            onPressed: () => showEditBottomSheet(p),
-                          ),
-                          Obx(() => IconButton(
-                            icon: c.isDeleting.value
-                                ? const CircularProgressIndicator()
-                                : const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {
-                              showDeleteConfirm(
-                                () => c.deleteProduct(p.id!),
-                              );
-                            },
-                          )),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              );
-            }),
-          ),
-        ],
-      ),
+      body: Obx(() => controller.isLoading.value
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: controller.products.length,
+              itemBuilder: (context, index) {
+                final product = controller.products[index];
+                return ProductCard(
+                  product: product,
+                  onEdit: () {
+                    controller.setEdit(product);
+                    Get.to(() => EditProductScreen(productId: product.id!));
+                  },
+                  onDelete: () => _showDeleteConfirm(product.id!),
+                );
+              },
+            )),
+    );
+  }
+
+  void _showDeleteConfirm(String id) {
+    Get.defaultDialog(
+      title: "Are you sure?",
+      middleText: "Do you want to delete this product?",
+      textConfirm: "Delete",
+      textCancel: "Cancel",
+      confirmTextColor: Colors.white,
+      buttonColor: Colors.red,
+      onConfirm: () {
+        controller.deleteProduct(id);
+        Get.back();
+      },
     );
   }
 }

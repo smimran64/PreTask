@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 class LocationController extends GetxController {
   var isLoading = false.obs;
   var locationPermissionStatus = ''.obs;
@@ -14,7 +15,6 @@ class LocationController extends GetxController {
   }
   Future<void> requestLocationPermission() async {
     isLoading.value = true;
-    
     try {
       bool serviceEnabled = await isLocationServiceEnabled();
       
@@ -70,7 +70,7 @@ class LocationController extends GetxController {
           colorText: Colors.white,
         );
         
-       ;
+       
       }
     } catch (e) {
       Get.snackbar(

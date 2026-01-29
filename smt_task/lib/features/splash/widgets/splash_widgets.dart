@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:smt_task/core/constant/image_path.dart';
 
 class SplashBody extends StatelessWidget {
@@ -10,19 +11,33 @@ class SplashBody extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(ImagePath.splash, height: 118, width: 114),
+        SlideInLeft(
+          duration: const Duration(seconds: 2),
+          from: 200,
+          child: Image.asset(
+            ImagePath.splash,
+            height: 118,
+            width: 114,
+          ),
+        ),
         const SizedBox(height: 24),
-        const Text(
-          'Theory test in my language',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        FadeInUp(
+          delay: const Duration(milliseconds: 500),
+          child: const Text(
+            'Theory test in my language',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
         ),
         const SizedBox(height: 8),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32),
-          child: Text(
-            'I must write the real test will be in English language and this app just helps you to understand the materials in your language',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 13),
+        FadeInUp(
+          delay: const Duration(milliseconds: 800),
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32),
+            child: Text(
+              'I must write the real test will be in English language and this app just helps you to understand the materials in your language',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 13),
+            ),
           ),
         ),
         const SizedBox(height: 80),

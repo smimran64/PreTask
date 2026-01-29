@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VerifyCodeController extends GetxController {
-  final List<TextEditingController> otpControllers = 
+  final List<TextEditingController> otpControllers =
       List.generate(4, (_) => TextEditingController());
-  final List<FocusNode> otpFocusNodes = 
-      List.generate(4, (_) => FocusNode());
+  final List<FocusNode> otpFocusNodes = List.generate(4, (_) => FocusNode());
 
   final RxBool isLoading = false.obs;
   final RxInt remainingTime = 60.obs;
@@ -30,6 +29,7 @@ class VerifyCodeController extends GetxController {
       }
     });
   }
+
   void onNumberTap(String number) {
     for (int i = 0; i < 4; i++) {
       if (otpControllers[i].text.isEmpty) {
@@ -62,26 +62,27 @@ class VerifyCodeController extends GetxController {
 
   Future<void> verifyOTP() async {
     final otp = getOTP();
+    const String correctOTP = "1234";
+
     if (otp.length != 4) {
       Get.snackbar(
         'Error',
         'Please enter complete OTP code',
-        snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
         colorText: Colors.white,
-        margin: const EdgeInsets.all(16),
-        borderRadius: 12,
       );
       return;
     }
 
     try {
       isLoading.value = true;
-      
       await Future.delayed(const Duration(seconds: 2));
 
-      Get.toNamed('/reset-password', arguments: email.value);
-
+      if (otp == correctOTP) {
+        Get.toNamed('/reset-password', arguments: email.value);
+      } else {
+        throw Exception("Invalid OTP");
+      }
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -89,8 +90,6 @@ class VerifyCodeController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red,
         colorText: Colors.white,
-        margin: const EdgeInsets.all(16),
-        borderRadius: 12,
       );
       clearOTP();
     } finally {
@@ -113,7 +112,6 @@ class VerifyCodeController extends GetxController {
     }
 
     try {
-     
       await Future.delayed(const Duration(seconds: 1));
 
       Get.snackbar(

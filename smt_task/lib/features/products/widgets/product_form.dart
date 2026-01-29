@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smt_task/core/common/widgets/custom_button_widgets.dart';
 import 'package:smt_task/core/common/widgets/custom_text_field.dart';
+import 'package:smt_task/routes/app_routes.dart';
 import '../controller/product_controller.dart';
 
 class ProductForm extends StatelessWidget {
@@ -14,7 +15,7 @@ class ProductForm extends StatelessWidget {
     final List<String> commonFields = ['capacity', 'price', 'CPU model'];
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF9FAFB), 
+      backgroundColor: const Color(0xFFF9FAFB),
       appBar: AppBar(
         title: const Text("Create Product",
             style: TextStyle(fontWeight: FontWeight.bold)),
@@ -42,15 +43,12 @@ class ProductForm extends StatelessWidget {
               label: "Product Name",
               hintText: "e.g. Apple MacBook Pro 16",
             ),
-
             const SizedBox(height: 30),
-
             _buildSectionHeader(
                 Icons.settings_suggest_outlined, "Technical Specs"),
             const SizedBox(height: 10),
             const Divider(),
             const SizedBox(height: 15),
-
             ...commonFields.map((field) {
               if (!controller.addData.containsKey(field)) {
                 controller.addData[field] = TextEditingController();
@@ -64,12 +62,10 @@ class ProductForm extends StatelessWidget {
                 ),
               );
             }),
-
             const SizedBox(height: 40),
-
             CustomButton(
               label: "Save Product",
-              onPressed: () => controller.addProduct(),
+              onPressed: () => Get.toNamed(AppRoutes.productList),
             ),
             const SizedBox(height: 20),
           ],

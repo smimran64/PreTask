@@ -38,19 +38,20 @@ class ProductCard extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0XFF1B6EF7),
-                  Color(0xFF6366F1)
-                ], 
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0XFF1B6EF7), Color(0xFF6366F1)],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(25),
                 topRight: Radius.circular(25),
               ),
+              border: Border.all(
+                  color: const Color.fromARGB(255, 29, 67, 104)
+                      .withValues(alpha: 0.8),
+                  width: 3.0),
             ),
             child: Row(
               children: [
@@ -77,14 +78,24 @@ class ProductCard extends StatelessWidget {
                 ),
                 _actionButton(Icons.edit_rounded, Colors.white, onEdit),
                 const SizedBox(width: 10),
-                _actionButton(
-                    Icons.delete_forever_rounded, Colors.white, onDelete),
+                _actionButton(Icons.delete_forever_rounded,
+                    const Color.fromARGB(255, 244, 51, 51), onDelete),
               ],
             ),
           ),
-
-          Padding(
+          Container(
             padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
+              ),
+              border: Border.all(
+                  color:
+                      const Color.fromARGB(255, 5, 5, 5).withValues(alpha: 0.8),
+                  width: 3.0),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -122,7 +133,8 @@ class ProductCard extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
-                              color: const Color(0XFF1B6EF7).withValues(alpha: 0.2)),
+                              color: const Color(0XFF1B6EF7)
+                                  .withValues(alpha: 0.8)),
                         ),
                         child: RichText(
                           text: TextSpan(
@@ -163,10 +175,10 @@ class ProductCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.2),
+          color: const Color.fromARGB(255, 245, 1, 1).withValues(alpha: 0.2),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Icon(icon, color: color, size: 22),
+        child: Icon(icon, color: color, size: 30),
       ),
     );
   }
